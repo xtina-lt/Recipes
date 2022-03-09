@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+{%block title%} Recipes {%endblock%}
+{%block header%} {{output['name']|title}} {%endblock%}
+{%block main%}
+    <table>
+        <th colspan="2">
+            Recipe
+        </th>
+        <tr>
+            <td>
+                <b>Description:</b>
+            </td>
+            <td>
+                {{output.description}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Under 30 Minutes:</b>
+            </td>
+            <td>
+                {% if output.under_30 == "y" or "Y"%}
+                    Yes
+                {% else %}
+                    No
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Instructions:</b>
+            </td>
+            <td>
+                {{output.instructions}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>Date Made:</b>
+            </td>
+            <td>
+                {{output.created_at}}
+            </td>
+    </table>
+    <a href="/recipes/read">Go Back</a>
+{%endblock%}

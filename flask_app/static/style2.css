@@ -1,0 +1,189 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+html{
+    /* background */
+    background-image: linear-gradient(to bottom right, rgba(60, 255, 0, 0.5), rgba(255, 102, 0, 0.5), rgba(255, 0, 0, 0.5));
+    background-position: center;
+    background-size: auto;
+    background-repeat: no-repeat;
+    /* size */
+    width: 100vw;
+    height: 100vh;
+}
+
+    body{ /*WHOLE DOC*/
+        box-sizing: border-box;
+        /* height and width */
+        width: 100vw;
+        height: 98vh;
+        /* font */
+        font-family: "Barlow Condensed";
+        text-align: center;
+        font-size: 2vh;
+        color: rgba(0, 0, 0, 0.6);
+    }
+        nav{
+            box-sizing: border-box;
+            background-color: rgba(240, 248, 255, 0.4);
+            border-radius: 2vh;
+            padding: 1vh;
+            margin: 1vh 1vh;
+            display: flex;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        main{
+            /*  change for phone */
+            /* sizing */
+            box-sizing: border-box;
+            margin: 0 auto;
+            /* height and width*/
+            width: 90vw; /*keep it small 80% of scrren*/
+            max-width: 1000px; /*don'tlet it get too big or stretch*/
+            height: 80vh;
+            /* flex */
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        main > div{
+            /*  change for phone */
+            /* sizing padding */
+            background-color: rgba(240, 248, 255, 0.4);
+            border-radius: 2vh;
+            padding: 1vh;
+            margin: 1vh;
+            /* height and width */
+            height: min-content;
+            max-height: 80vh;
+            max-width: 50%;
+            /* overflow */
+            overflow-y: scroll;
+            scrollbar-width: none;
+        }
+
+
+
+/*HEADERS*/
+h1, h2, h3, h4, h5, h6 {
+    font-family: Lobster;
+}
+    h1{
+        color: rgba(255, 0, 0, 0.5)
+    }
+
+/* TEXT MANIPULATION */
+.accent{
+    color:rgba(38, 143, 6, 0.7);
+}
+
+.emoji{
+    font-size: 20vh;
+}
+
+.inline{
+    display: inline;
+    width: auto;
+}
+
+/* LINKS */
+a {
+    color:rgba(38, 143, 6, 0.7);
+    text-decoration: none;
+}
+
+/* FORMS */
+input, select, textarea, select:focus{
+    /* background and border */
+    background-color: rgba(240, 248, 255, 0.3);
+    border: none;
+    border-radius: 2vh;
+    /* size */
+    box-sizing: border-box;
+    width: 100%;
+    padding: 1vh 2vh;
+    margin: 1vh 0;
+    resize: none;
+    /* font */
+    font-family: "Barlow Condensed";
+    font-size: 2vh;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* TABLES */
+table{
+    border-collapse: collapse;
+    box-sizing: border-box;
+    /* background and border */
+    background-color: rgba(240, 248, 255, 0.6);
+    border: none;
+    /* widht */
+    width: 100%;
+    /* padding and margin */
+    padding: 1vh;
+    margin: 1vh auto;
+}
+
+    th {
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        background-color: rgba(38, 143, 6, 0.7);
+        color: white;
+        }
+
+    td, th {
+    border: 1px solid rgba(240, 248, 255, 0.4);
+    padding: 8px;
+    }
+    
+    tr:nth-child(even){
+        background-color: rgba(240, 248, 255, 0.3);
+    }
+
+    tr:hover {
+        background-color: rgba(240, 248, 255, 0.6);
+    }
+
+/* lists */
+ul{
+    list-style-type: none;
+
+}
+
+nav > ul > li{
+    display: inline;
+    padding: 0;
+    margin: 0;
+}
+
+
+@media only screen and (max-height: 575.98px) and (orientation: landscape) {
+    body, main, .container{
+        display: block;
+        box-sizing: border-box;
+        height: 95vh;
+        width: 97vw;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        max-width: 100vw;
+    }
+
+    .container{
+        box-sizing: border-box;
+        display: block;
+        width: 97vw;
+        max-height: 80vh;
+    }
+    main{
+        display: block;
+        font-size: 5vh;
+        box-sizing: border-box;
+        width: 97vw;
+        max-height: 80vh;
+        padding: 0;
+    }
+}

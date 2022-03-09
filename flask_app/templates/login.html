@@ -1,0 +1,64 @@
+{%extends 'base2.html'%}
+{%block title%} Users {%endblock%}
+{%block header%} Login / Register {%endblock%}
+{%block main%}
+<div>
+    {% with messages = get_flashed_messages(category_filter=["register"]) %}
+    {% if messages %}
+        {% for i in messages %}
+            <p>{{i}}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form  action="/user/create/process" method="post">
+        <!-- first name -->
+        <label for="first_name">
+            First Name:
+        </label>
+        <input type="text" name="first_name">
+        <!-- last name -->
+        <label for="last_name">
+            Last Name:
+        </label>
+        <input type="text" name="last_name">
+        <!-- email -->
+        <label for="email">
+            Email:
+        </label>
+        <input type="text" name="email">
+        <!-- check email -->
+        <label for="check_email">
+            Check Email:
+        </label>
+        <input type="text" name="check_email">
+        <!-- password -->
+        <label>
+            Password:
+        </label>
+        <input type="password" name="password">
+        <!-- check password -->
+        <label>
+            Check Password:
+        </label>
+        <input type="password" name="check_pword">
+        <!-- submit -->
+        <input type="submit" value="Come On In....">
+    </form>
+</div>
+<div>
+    {% with messages = get_flashed_messages(category_filter=["login"]) %}
+    {% if messages %}
+        {% for i in messages %}
+            <p>{{i}}</p>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action="/user/login" method="post">
+        <label for="email">Email:</label>
+        <input type="text" name="email">
+        <label for="password">Password:</label>
+        <input type="password" name="password">
+        <input type="submit" value="Login">
+    </form>
+</div>
+{%endblock%}

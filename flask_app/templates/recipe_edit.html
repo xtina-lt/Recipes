@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{%block title%} Recipes {%endblock%}
+{%block header%} Change {{output.name|title}} {%endblock%}
+{%block main%}
+    {% if session%}
+        <form action="/recipe/update/process" method="POST">
+            <!-- id -->
+            <input type="hidden" name="id" value="{{output.id}}">
+            <!-- name -->
+            <label for="name">
+                Recipe Name:
+            </label>
+            <input type="text" name="name" value="{{output.name}}">
+            <br>
+            <!-- description -->
+            <label for="description">
+                Description:
+            </label>
+            <input type="text" name="description" value="{{output.description}}">
+            <br>
+            <!-- instructions-->
+            <label for="instructions">
+                Instructions
+            </label> 
+            <textarea name="instructions" rows="4" cols="10">{{output.instructions}}
+            </textarea>
+            <br>
+            <!-- under_thirty-->
+            Under 30?
+            <br>
+            <label for="yes" class="inline">
+                Yes
+                <input type="radio" class="inline" name="under_thirty" id="yes" value="Y">
+            </label>
+            
+            <label for="no" class="inline">
+                No
+                <input type="radio" class="inline" name="under_thirty" id="no" value="N">
+            </label>
+            <!-- creator_id -->
+            <input type="hidden" name="creator_id" value="{{output.creator_id}}">
+            <!-- submit -->
+            <input type="submit" value="Yummy Changes!">
+        </form>
+    {% else %}
+        Try logging in...
+        <br>
+        <span class="emoji">
+            🍰
+        </span>
+    {% endif %}
+{%endblock%}

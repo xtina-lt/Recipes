@@ -1,0 +1,42 @@
+{%extends "base.html"%}
+{%block title%} Recipes {%endblock%}
+{%block header%} Peeps {%endblock%}
+{%block main%}
+    {% if session %}
+        <table>
+            <th>
+                ID
+            </th>
+            <th>
+                First
+            </th>
+            <th>
+                Last
+            </th>
+            <th>
+                Email
+            </th>
+
+            {%for i in output%}
+                <tr>
+                    <td>
+                        {{i.id}}
+                    </td>
+                    <td>
+                        <a href="/user/read/{{i.id}}">{{i.first_name.title()}}</a>
+                    </td>
+                    <td>
+                        {{i.last_name.title()}}
+                    </td>
+                    <td>
+                        {{i.email}}
+                    </td>
+                </tr>
+            {%endfor%}
+        </table>
+    {% else %}
+        Try logging in...
+        <br>
+        <span class="emoji">🍰</span>
+    {% endif %}
+{%endblock%}

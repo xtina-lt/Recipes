@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍔{%block title%} {%endblock%}🍔</title>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed&family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        {% if session %}
+            <h1>
+                {{session['logged_in']['first_name'] | title}}
+            </h1>
+        {% endif %}
+        <ul>
+            <li>
+                <a href="/">
+                    🍰Home
+                </a>
+            </li>
+            {% if not session %}
+            <li>
+                <a href="/user/login_register">
+                    🍰Login/Register
+                </a>
+            </li>
+            {%endif%}
+            {% if session %}
+            <li>
+                <a href="/recipe/create">
+                    🍰Create
+                </a>
+            </li>
+            <li>
+                <a href="/user/read/{{session['logged_in']}}">
+                    🍰Profile
+                </a>
+            </li>
+            <li>
+                <a href="/user/logout">
+                    🍰Logout
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    <header>
+        <h1 class="accent">
+            🍔{%block header%} {%endblock%}🍔
+        </h1>
+    </header>
+    <div class = container>
+        <main>
+            {%block main%}
+            {%endblock%}
+        </main>
+    </container>
+</body>
+</html>

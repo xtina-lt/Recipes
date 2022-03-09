@@ -1,0 +1,76 @@
+{%extends 'base.html'%}
+{%block title%} Recipes {%endblock%}
+{%block header%} Hello {{element['last_name']|capitalize}}, {{element['first_name']|capitalize}}!{%endblock%}
+{%block main%}
+
+        <table>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                Email
+            </th>
+            <tr>
+                <td>
+                    {{element['first_name']|capitalize}}
+                </td>
+                <td>
+                    {{element['last_name']|capitalize}}
+                </td>
+                <td>
+                    {{element['email']}}
+                </td>
+            </tr>
+        </table>
+
+        <table>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Under 30?
+            </th>
+            <th>
+                Options
+            </th>
+            {% for i in output%}
+                <tr>
+                    <td>
+                        {{i.id}}
+                    </td>
+                    <td>
+                        {{i.name.title()}}
+                    </td>
+                    <td>
+                        {% if i.under_30 == 'N' or i.under_30 == 'n'%}
+                            No
+                        {% else %}
+                            Yes
+                        {% endif %}
+                    </td>
+                        <td>
+                            <a href="/recipe/read/{{i.id}}">
+                                Instructions
+                            </a>
+                            <br>
+                            {% if session['logged_in']['id'] == i.creator_id %}
+                                <a href='/recipe/update/{{i.id}}'>
+                                    Edit
+                                </a>
+                                |
+                                <a href='/recipe/delete/{{i.id}}'>
+                                    Delete
+                                </a>
+                            {% endif %}
+                        </td>
+                </tr>
+            {%endfor%}
+        </table>
+
+{%endblock%}
