@@ -49,7 +49,7 @@ class User:
         # 1) if no email
             return False
             # 2) return false
-    
+
     '''read one'''
     @classmethod
     def select_one(cls, data):
@@ -91,8 +91,9 @@ class User:
             return is_valid
             # 7) return is_valid variable
 
-    
+    #######################
     '''CREATE / REGISTER'''
+    #######################
     '''create'''
     @classmethod
     def insert(cls, data):
@@ -104,28 +105,56 @@ class User:
     @staticmethod
     def validate_insert(e):
         is_valid=True
+        # 1) declare is valid
+        # 1) assign True value
         '''first/last name lengths'''
+        # 2) NAME LENGTHS
         if len(e["first_name"]) < 3:
+        # 2a) check length
             flash("First name should be greater than 3 characters", "register")
+            # b) set flash message and category
             is_valid=False
+            # c) change is_Valid value
         if len(e["last_name"]) < 3:
+        # 2a) check length
             flash("Last name should be greater than 3 characters", "register")
+            # b) set flash message and category
             is_valid=False
+            # c) change is_valid value
         '''email'''
+        # 3) EMAILS
         if not EMAIL_REGEX.match(e["email"]):
+        # 3a) compare email to regex format
             flash("Not a valid email", "register")
+            # b) set flash message and category
             is_valid=False
+            # c) change is_valid value
         if e["email"] != e["check_email"]:
+        # 3a) compare confirm email
             flash("Emails are not the same", "register")
+            # b) set flash message and category
             is_valid=False
+            # c) change is_valid value
         if User.get_email(e):
+        # 3a) if the email from the form
+        # 3a) is already in database
             flash("Email in use 😞", "register")
+            # b) set flash message and category
             is_valid= False
+            # c) change is_valid value
         '''password'''
+        # 4) PASSWORDS
         if e["password"] != e["check_pword"]:
+        # 4a) compare confirm password
             flash("Passwords do not match", "register")
+            # b) set flash message and category
             is_valid=False
+            # c) change is_valid value
         if not PASSWORD_REGEX.match(e["password"]):
+        # 4a) compare email to regex format
             flash("Password must contain: 1 upper, 1 lower, 1 special character, 1 number.", "register")
+            # b) set flash message and category
             is_valid = False
+            # c) change is_valid value
         return is_valid
+        # 5) return is_valid value

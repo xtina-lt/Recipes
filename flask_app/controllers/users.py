@@ -1,9 +1,15 @@
 from flask import Flask, render_template, request, redirect, session, get_flashed_messages
+# 1) import get_flashed_messages
 from flask_app import app
+# 0 ) import app
 from flask_app.models.user import User
+# 0 ) import model user
 from flask_app.models.recipe import Recipe
+# 0 ) import model recipe
 from flask_bcrypt import Bcrypt
+# 2) import Bcrypt object
 bcrypt=Bcrypt(app)
+# 2) initialze new Bcrypt object using app
 
 '''HOME'''
 @app.route("/")
@@ -49,6 +55,7 @@ def login():
 @app.route("/user/login_register")
 def create_user():
 # create new user == REGISTER
+# 1) show login / show register
     return render_template("login.html")
 
 '''register'''
@@ -56,18 +63,29 @@ def create_user():
 def create_process():
 # create new user == REGISTER
     data={k:v for k,v in request.form.items()}
+    # 2) get mutabale dictionary from form
     if not User.validate_insert(data):
+    # 3) validate == False
         return redirect("/user/login_register")
+        # 7) go back to form
+        
     else:
+    # 3) validate == True
         data["password"] = bcrypt.generate_password_hash(request.form["password"])
+        # 4) hash password
         User.insert(data)
+        # 5) insert form data into users 
         session['logged_in'] = User.get_email(data)
+        # 6) get user information by email from data
+        # 6) save as logged in session
         return redirect(f"/user/read/{session['logged_in']['id']}")
+        # 7) go to new user's dashboard
 
 '''logout'''
 @app.route("/user/logout")
 def logout():
     session.clear()
+    # 1) .clear() method
     return redirect("/")
 
 
