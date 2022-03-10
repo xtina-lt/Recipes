@@ -22,8 +22,7 @@ def recipe_create():
 
 @app.route("/recipe/create/process", methods=["POST"])
 def recipe_create_process():
-    data = {k:v for k,v in request.form.items()}
-    print(data)
+    data = request.form
     Recipe.insert(data)
     return redirect("/recipes/read")
 

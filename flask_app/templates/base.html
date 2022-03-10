@@ -10,9 +10,9 @@
 </head>
 <body>
     <nav>
-        {% if session %}
+        {% if session['logged_in'] %}
             <h1>
-                {{session['logged_in']['first_name'] | title}}
+                {{session['logged_in'].first_name | title}}
             </h1>
         {% endif %}
         <ul>
@@ -21,22 +21,22 @@
                     🍰Home
                 </a>
             </li>
-            {% if not session %}
+            {% if not session['logged_in'] %}
             <li>
                 <a href="/user/login_register">
                     🍰Login/Register
                 </a>
             </li>
             {%endif%}
-            {% if session %}
+            {% if session['logged_in'] %}
             <li>
                 <a href="/recipe/create">
                     🍰Create
                 </a>
             </li>
             <li>
-                <a href="/user/read/{{session['logged_in']}}">
-                    🍰Profile
+                <a href="/user/read/{{session['logged_in'].id}}">
+                    🍰Dashboard
                 </a>
             </li>
             <li>

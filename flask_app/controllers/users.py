@@ -30,13 +30,19 @@ def read_user(id):
 @app.route("/user/login", methods=["POST"])
 def login():
     data = request.form
-    print(data)
+    # 1) get immutable dictionary from form 
     if not User.validate_login(data):
+    # 2) if validate login form data == False
         return redirect("/user/login_register")
+        # 4) redirect to form
     else:
+    # 2) if validate login form data == True
         session["logged_in"] = User.get_email(data)
-        print(session["logged_in"])
-    return redirect(f"/user/read/{session['logged_in']}")
+        # 3) declare session logged in variable
+        # 3) assign result of get_email() 
+        # 3) using data dict from form
+        return redirect(f"/user/read/{session['logged_in']['id']}")
+        # 4) return to logged in dashboard
 
 
 '''CREATE'''
@@ -54,9 +60,9 @@ def create_process():
         return redirect("/user/login_register")
     else:
         data["password"] = bcrypt.generate_password_hash(request.form["password"])
-        session['logged_in'] = User.insert(data)
-        print(session["logged_in"])
-    return redirect(f"/user/read/{session['logged_in']}")
+        User.insert(data)
+        session['logged_in'] = User.get_email(data)
+        return redirect(f"/user/read/{session['logged_in']['id']}")
 
 '''logout'''
 @app.route("/user/logout")
