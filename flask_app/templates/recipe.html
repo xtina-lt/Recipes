@@ -2,6 +2,7 @@
 {%block title%} Recipes {%endblock%}
 {%block header%} {{output['name']|title}} {%endblock%}
 {%block main%}
+<div>
     <table>
         <th colspan="2">
             Recipe
@@ -42,5 +43,5 @@
                 {{output.created_at}}
             </td>
     </table>
-    <a href="/recipes/read">Go Back</a>
+</div>
 {%endblock%}

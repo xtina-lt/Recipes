@@ -4,12 +4,12 @@ from flask_app.models.recipe import Recipe
 from flask_app.models.user import User
 
 '''READ ALL'''
-@app.route("/recipes/read")
+@app.route("/recipes")
 def read_recipes():
     return render_template("recipes.html", output=Recipe.select_all())
 
 '''READ ONE'''
-@app.route("/recipe/read/<id>")
+@app.route("/recipe/<id>")
 def read_recipe(id):
     data={"id": id}
     result = Recipe.select_one(data)
@@ -27,7 +27,7 @@ def recipe_create_process():
     return redirect("/recipes/read")
 
 '''EDIT'''
-@app.route("/recipe/update/<id>")
+@app.route("/recipe/<id>/update")
 def recipe_update(id):
     data={"id": id}
     return render_template("recipe_edit.html", output = Recipe.select_one(data))
@@ -37,11 +37,11 @@ def recipe_update_process():
     data={k:v for k,v in request.form.items()}
     data['instructions']=data['instructions'].strip()
     Recipe.update(data)
-    return redirect(f"/user/read/{session['logged_in']['id']}")
+    return redirect(f"/user/{session['logged_in']['id']}/dash")
 
 '''DELETE'''
-@app.route("/recipe/delete/<id>")
+@app.route("/recipe/<id>/delete")
 def delete_recipe(id):
     data={"id":id}
     Recipe.delete(data)
-    return redirect("/recipes/read")
+    return redirect("/recipes")

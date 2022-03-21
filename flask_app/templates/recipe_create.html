@@ -2,7 +2,7 @@
 {%block title%} Recipes {%endblock%}
 {%block header%} New Recipe {%endblock%}
 {%block main%}
-    {% if session%}
+    {% if session['logged_in']%}
         <form action="/recipe/create/process" method="POST">
             <!-- name -->
             <label for="name">

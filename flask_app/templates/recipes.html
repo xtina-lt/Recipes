@@ -2,7 +2,8 @@
 {%block title%} Recipes {%endblock%}
 {%block header%} Food {%endblock%}
 {%block main%}
-    {% if session %}
+    {% if session['logged_in'] %}
+    <div>
         <table>
             <th>
                 ID
@@ -32,16 +33,16 @@
                         {% endif %}
                     </td>
                         <td>
-                            <a href="/recipe/read/{{i.id}}">
+                            <a href="/recipe/{{i.id}}">
                                 Instructions
                             </a>
                             <br>
                             {% if session['logged_in']['id'] == i.creator_id %}
-                            <a href='/recipe/update/{{i.id}}'>
+                            <a href='/recipe/{{i.id}}/update'>
                                 Edit
                             </a>
                             |
-                            <a href='/recipe/delete/{{i.id}}'>
+                            <a href='/recipe/{{i.id}}/delete'>
                                 Delete
                             </a>
                             {% endif %}
@@ -49,9 +50,14 @@
                 </tr>
             {%endfor%}
         </table>
+    </div>
     {% else %}
-        Try logging in...
-        <br>
-        <span class="emoji">🍰</span>
+        <div>
+            Try logging in...
+            <br>
+            <span class="emoji">
+                🍰
+            </span>
+        </div>
     {% endif %}
 {%endblock%}

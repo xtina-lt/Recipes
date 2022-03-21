@@ -3,6 +3,7 @@
 {%block header%} Change {{output.name|title}} {%endblock%}
 {%block main%}
     {% if session%}
+    <div>
         <form action="/recipe/update/process" method="POST">
             <!-- id -->
             <input type="hidden" name="id" value="{{output.id}}">
@@ -42,11 +43,14 @@
             <!-- submit -->
             <input type="submit" value="Yummy Changes!">
         </form>
+    </div>
     {% else %}
+    <div>
         Try logging in...
         <br>
         <span class="emoji">
             🍰
         </span>
+    </div>
     {% endif %}
 {%endblock%}

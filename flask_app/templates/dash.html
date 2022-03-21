@@ -1,7 +1,14 @@
 {%extends 'base.html'%}
 {%block title%} Recipes {%endblock%}
-{%block header%} Hello {{element['last_name']|capitalize}}, {{element['first_name']|capitalize}}!{%endblock%}
+    {%block header%} 
+        {%if session['logged_in']%}
+            Hello {{element['last_name']|capitalize}}, {{element['first_name']|capitalize}}!
+        {%else%}
+            Hey There..
+        {%endif%}
+    {%endblock%}
     {%block main%}
+    {%if session['logged_in']%}
         <div>
             <table>
                 <th>
@@ -57,16 +64,16 @@
                             {% endif %}
                         </td>
                             <td>
-                                <a href="/recipe/read/{{i.id}}">
+                                <a href="/recipe/{{i.id}}">
                                     Instructions
                                 </a>
                                 <br>
                                 {% if session['logged_in']['id'] == i.creator_id %}
-                                    <a href='/recipe/update/{{i.id}}'>
+                                    <a href='/recipe/{{i.id}}/update'>
                                         Edit
                                     </a>
                                     |
-                                    <a href='/recipe/delete/{{i.id}}'>
+                                    <a href='/recipe/{{i.id}}/delete'>
                                         Delete
                                     </a>
                                 {% endif %}
@@ -75,4 +82,13 @@
                 {%endfor%}
             </table>
         </div>
-    {%endblock%}
+        {%else%}
+        <div>
+            Try logging in
+            <br>
+            <span class="emoji">
+                🍰
+            </span>
+        </div>
+        {%endif%}
+        {%endblock%}

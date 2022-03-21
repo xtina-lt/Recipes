@@ -1,5 +1,4 @@
-{%extends 'base2.html'%}
-{%block title%} Users {%endblock%}
+{%extends 'base.html'%}
 {%block header%} Login / Register {%endblock%}
 {%block main%}
 <div>
@@ -10,7 +9,7 @@
         {% endfor %}
     {% endif %}
     {% endwith %}
-    <form  action="/user/create/process" method="post">
+    <form  action="/user/reg/process" method="post">
         <!-- first name -->
         <label for="first_name">
             First Name:
@@ -53,7 +52,7 @@
         {% endfor %}
     {% endif %}
     {% endwith %}
-    <form action="/user/login" method="post">
+    <form action="/user/login/process" method="post">
         <label for="email">Email:</label>
         <input type="text" name="email">
         <label for="password">Password:</label>

@@ -16,30 +16,24 @@ bcrypt=Bcrypt(app)
 def index():
     return render_template("index.html")
 
-
-'''READ ALL'''
-@app.route("/users/read")
-def read_users():
-    results = User.select_all()
-    return render_template("users.html", output=results)
-
-
-'''READ ONE'''
-@app.route("/user/read/<id>")
-def read_user(id):
-    data={"id": id}
-    element = User.select_one(data)
-    results = Recipe.select_all()
-    return render_template("user.html", element=element, output=results)
+############################
+'''LOGIN AND REGISTRATION'''
+############################
+'''show'''
+@app.route("/user/login_reg")
+def create_user():
+# create new user == REGISTER
+# 1) show login / show register
+    return render_template("login.html")
 
 '''login'''
-@app.route("/user/login", methods=["POST"])
+@app.route("/user/login/process", methods=["POST"])
 def login():
     data = request.form
     # 1) get immutable dictionary from form 
     if not User.validate_login(data):
     # 2) if validate login form data == False
-        return redirect("/user/login_register")
+        return redirect("/user/login_reg")
         # 4) redirect to form
     else:
     # 2) if validate login form data == True
@@ -47,26 +41,18 @@ def login():
         # 3) declare session logged in variable
         # 3) assign result of get_email() 
         # 3) using data dict from form
-        return redirect(f"/user/read/{session['logged_in']['id']}")
+        return redirect(f"/user/{session['logged_in']['id']}/dash")
         # 4) return to logged in dashboard
 
-
-'''CREATE'''
-@app.route("/user/login_register")
-def create_user():
-# create new user == REGISTER
-# 1) show login / show register
-    return render_template("login.html")
-
 '''register'''
-@app.route("/user/create/process", methods=["POST"])
+@app.route("/user/reg/process", methods=["POST"])
 def create_process():
 # create new user == REGISTER
     data={k:v for k,v in request.form.items()}
     # 2) get mutabale dictionary from form
     if not User.validate_insert(data):
     # 3) validate == False
-        return redirect("/user/login_register")
+        return redirect("/user/login_reg")
         # 7) go back to form
         
     else:
@@ -78,7 +64,7 @@ def create_process():
         session['logged_in'] = User.get_email(data)
         # 6) get user information by email from data
         # 6) save as logged in session
-        return redirect(f"/user/read/{session['logged_in']['id']}")
+        return redirect(f"/user/{session['logged_in']['id']}/dash")
         # 7) go to new user's dashboard
 
 '''logout'''
@@ -87,6 +73,23 @@ def logout():
     session.clear()
     # 1) .clear() method
     return redirect("/")
+
+##########
+'''READ'''
+##########
+'''read all'''
+@app.route("/users")
+def read_users():
+    results = User.select_all()
+    return render_template("users.html", output=results)
+
+'''read one/dashboard'''
+@app.route("/user/<id>/dash")
+def dashboard(id):
+    data={"id": int(id)}
+    element = User.select_one(data)
+    results = Recipe.select_all()
+    return render_template("dash.html", element=element, output=results)
 
 
 
