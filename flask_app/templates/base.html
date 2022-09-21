@@ -20,11 +20,14 @@
                 🍰Login/Register
             </a>
         {% else %}
-                <a href="/user/{{session['logged_in']['id']}}/dash">
-                    🍰Dashboard
-                </a>
-                <a href="/user/logout">
-                    🍰Logout
+            <a href="/recipe/create"/>
+                🍰Create
+            </a>
+            <a href="/user/{{session['logged_in']['id']}}/dash">
+                🍰Dashboard
+            </a>
+            <a href="/user/logout">
+                🍰Logout
                 </a>
         {% endif %}
     </nav>

@@ -3,43 +3,45 @@
 {%block header%} New Recipe {%endblock%}
 {%block main%}
     {% if session['logged_in']%}
-        <form action="/recipe/create/process" method="POST">
-            <!-- name -->
-            <label for="name">
-                Recipe Name:
-            </label>
-            <input type="text" name="name">
-            <br>
-            <!-- description -->
-            <label for="description">
-                Description:
-            </label>
-            <input type="text" name="description">
-            <br>
-            <!-- instructions-->
-            <label for="instructions">
-                Instructions
-            </label> 
-            <textarea cols="5" rows="5" name="instructions" placeholder="Talk to me..">
-            </textarea>
-            <br>
-            <!-- under_thirty-->
-            Under 30?
-            <br>
-            <label for="yes" class="inline">
-                Yes
-                <input type="radio" class="inline" name="under_thirty" id="yes" value="Y">
-            </label>
-            
-            <label for="no" class="inline">
-                No
-                <input type="radio" class="inline" name="under_thirty" id="no" value="N">
-            </label>
-            <!-- creator_id -->
-            <input type="hidden" name="creator_id" value="{{session['logged_in']['id']}}">
-            <!-- submit -->
-            <input type="submit" value="Yumm Yumm!">
-        </form>
+        <div>
+            <form action="/recipe/create/process" method="POST">
+                <!-- name -->
+                <label for="name">
+                    Recipe Name:
+                </label>
+                <input type="text" name="name">
+                <br>
+                <!-- description -->
+                <label for="description">
+                    Description:
+                </label>
+                <input type="text" name="description">
+                <br>
+                <!-- instructions-->
+                <label for="instructions">
+                    Instructions
+                </label> 
+                <textarea cols="5" rows="5" name="instructions" placeholder="Talk to me..">
+                </textarea>
+                <br>
+                <!-- under_thirty-->
+                Under 30?
+                <br>
+                <label for="yes" class="inline">
+                    Yes
+                    <input type="radio" class="inline" name="under_thirty" id="yes" value="Y">
+                </label>
+                
+                <label for="no" class="inline">
+                    No
+                    <input type="radio" class="inline" name="under_thirty" id="no" value="N">
+                </label>
+                <!-- creator_id -->
+                <input type="hidden" name="creator_id" value="{{session['logged_in']['id']}}">
+                <!-- submit -->
+                <input type="submit" value="Yumm Yumm!">
+            </form>
+        </div>
     {% else %}
         Try logging in...
         <br>
