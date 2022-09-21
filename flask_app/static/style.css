@@ -68,7 +68,20 @@ html{
             display: flex;
             justify-content: center;
             align-items: center;
+            /* animation */
+            animation: fadeInAnimation ease 8s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards
         }
+
+            @keyframes fadeInAnimation {
+                0% {
+                    opacity: 0;
+                }
+                inherit {
+                    opacity: 1;
+                }
+            }
             main > div{
             /* background and set */
             background-color: rgba(205, 236, 242, 0.8);
