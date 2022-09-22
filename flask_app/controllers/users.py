@@ -1,3 +1,4 @@
+from cmath import log
 from flask import Flask, render_template, request, redirect, session, get_flashed_messages
 # 1) import get_flashed_messages
 from flask_app import app
@@ -48,7 +49,8 @@ def login():
 @app.route("/user/reg/process", methods=["POST"])
 def create_process():
 # create new user == REGISTER
-    data={k:v for k,v in request.form.items()}
+    print("Hello World") 
+    # data={k:v for k,v in request.form.items()}
     # 2) get mutabale dictionary from form
     # if not User.validate_insert(data):
     # # 3) validate == False
