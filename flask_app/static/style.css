@@ -32,7 +32,8 @@ html{
     }
         nav{
             /* background border */
-            background-color: rgba(173, 255, 47,0.8);
+            /* background-color: rgba(173, 255, 47,0.8); */
+            background-color: black;
             border-radius: 2vh;
             /* padding margin */
             padding: 1vh;
