@@ -50,22 +50,22 @@ def create_process():
 # create new user == REGISTER
     data={k:v for k,v in request.form.items()}
     # 2) get mutabale dictionary from form
-    if not User.validate_insert(data):
-    # 3) validate == False
-        return redirect("/user/login_reg")
-        # 7) go back to form
+    # if not User.validate_insert(data):
+    # # 3) validate == False
+    #     return redirect("/user/login_reg")
+    #     # 7) go back to form
         
-    else:
-    # 3) validate == True
-        data["password"] = bcrypt.generate_password_hash(request.form["password"])
-        # 4) hash password
-        User.insert(data)
-        # 5) insert form data into users 
-        session['logged_in'] = User.get_email(data)
-        # 6) get user information by email from data
-        # 6) save as logged in session
-        return redirect(f"/user/{session['logged_in']['id']}/dash")
-        # 7) go to new user's dashboard
+    # else:
+    # # 3) validate == True
+    #     data["password"] = bcrypt.generate_password_hash(request.form["password"])
+    #     # 4) hash password
+    #     User.insert(data)
+    #     # 5) insert form data into users 
+    #     session['logged_in'] = User.get_email(data)
+    #     # 6) get user information by email from data
+    #     # 6) save as logged in session
+    #     return redirect(f"/user/{session['logged_in']['id']}/dash")
+    #     # 7) go to new user's dashboard
 
 '''logout'''
 @app.route("/user/logout")
