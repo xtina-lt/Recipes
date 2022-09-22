@@ -24,7 +24,7 @@ def recipe_create():
 def recipe_create_process():
     data = request.form
     Recipe.insert(data)
-    return redirect("/recipes/read")
+    return redirect("/recipes")
 
 '''EDIT'''
 @app.route("/recipe/<id>/update")
@@ -37,7 +37,7 @@ def recipe_update_process():
     data={k:v for k,v in request.form.items()}
     data['instructions']=data['instructions'].strip()
     Recipe.update(data)
-    return redirect(f"/user/{session['logged_in']['id']}/dash")
+    return redirect(f"/dashboard")
 
 '''DELETE'''
 @app.route("/recipe/<id>/delete")

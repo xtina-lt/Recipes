@@ -34,26 +34,31 @@ def login():
     # 1) get immutable dictionary from form 
     if not User.validate_login(data):
     # 2) if validate login form data == False
-        return redirect("/user/login_reg")
+        return redirect("/")
         # 4) redirect to form
     else:
     # 2) if validate login form data == True
-        session["logged_in"] = User.get_email(data)
+        result = User.get_email(data)
+        data={
+            "id" : result['id'],
+            "first_name" : result['first_name'],
+            "last_name" : result['last_name'],
+        }
+        session["logged_in"] = data
         # 3) declare session logged in variable
         # 3) assign result of get_email() 
-        # 3) using data dict from form
-        return redirect(f"/user/{session['logged_in']['id']}/dash")
-        # 4) return to logged in dashboard
+        print(session["logged_in"])
+        return redirect("/dashboard")
 
 '''register'''
 @app.route("/user/reg/process", methods=["POST"])
-def create_process_lets_go():
-    # create new user == REGISTER
+def create_process():
+# create new user == REGISTER
     data={k:v for k,v in request.form.items()}
     # 2) get mutabale dictionary from form
     if not User.validate_insert(data):
     # 3) validate == False
-        return redirect("/user/login_reg")
+        return redirect("/")
         # 7) go back to form
         
     else:
@@ -62,11 +67,18 @@ def create_process_lets_go():
         # 4) hash password
         User.insert(data)
         # 5) insert form data into users 
-        session['logged_in'] = User.get_email(data)
-        # 6) get user information by email from data
-        # 6) save as logged in session
+    # 2) if validate login form data == True
+        result = User.get_email(data)
+        data2={
+            "id" : result['id'],
+            "first_name" : result['first_name'],
+            "last_name" : result['last_name'],
+        }
+        session["logged_in"] = data2
+        # 3) declare session logged in variable
+        # 3) assign result of get_email() 
+        print(session["logged_in"])
         return redirect("/dashboard")
-        # return redirect(f"/user/{session['logged_in']['id']}/dash")
         # 7) go to new user's dashboard
 
 '''logout'''
@@ -86,13 +98,15 @@ def read_users():
     return render_template("users.html", output=results)
 
 '''read one/dashboard'''
-@app.route("/user/<id>/dash")
-def dashboard(id):
-    data={"id": int(id)}
-    element = User.select_one(data)
-    results = Recipe.select_all()
-    return render_template("dash.html", element=element, output=results)
-
+@app.route("/dashboard")
+def dashboard():
+    if session:
+        print(session['logged_in']['id'])
+        element = User.select_one(session['logged_in']['id'])
+        results = Recipe.select_all()
+        return render_template("dash.html", element=element,output=results)
+    else:
+        return redirect("/")
 
 
 '''CATCHALL'''

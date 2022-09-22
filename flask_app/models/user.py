@@ -53,9 +53,12 @@ class User:
     '''read one'''
     @classmethod
     def select_one(cls, data):
-        query="SELECT * FROM users WHERE id=%(id)s"
-        result = connectToMySQL(cls.db).query_db(query, data)
-        return cls(result[0])
+        print(data)
+        query="SELECT * FROM users WHERE id=" + str(data)
+        print(query)
+        result = connectToMySQL(cls.db).query_db(query)
+        print('result', result)
+        return result[0]
         # instatiate class object 
         # with first dictionary in list
             
