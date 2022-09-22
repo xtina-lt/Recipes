@@ -34,7 +34,7 @@ def login():
     # 1) get immutable dictionary from form 
     if not User.validate_login(data):
     # 2) if validate login form data == False
-        return redirect("/")
+        return redirect("/user/login_reg")
         # 4) redirect to form
     else:
     # 2) if validate login form data == True
@@ -58,7 +58,7 @@ def create_process():
     # 2) get mutabale dictionary from form
     if not User.validate_insert(data):
     # 3) validate == False
-        return redirect("/")
+        return redirect("/user/login_reg")
         # 7) go back to form
         
     else:
